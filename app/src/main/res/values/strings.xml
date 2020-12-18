@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Project1_MyMoviesApp</string>
+    <string name="isWatched_text">Watched</string>
+</resources>
