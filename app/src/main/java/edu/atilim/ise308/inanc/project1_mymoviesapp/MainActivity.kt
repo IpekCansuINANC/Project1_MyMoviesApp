@@ -1,5 +1,6 @@
 package edu.atilim.ise308.inanc.project1_mymoviesapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import android.os.Bundle
@@ -22,10 +23,14 @@ class MainActivity : AppCompatActivity() {
 
         val fabNewMovie = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         fabNewMovie.setOnClickListener{
+            //FAB BUTONUNA TIKLADIĞINDA ADD EDİT FRAGMENT LAYOUT AÇILACAK
             val newMovie = AddEditFragment()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_container,AddEditFragment())
             fragmentTransaction.commit()
+
+            //val intentToMovie = Intent(this,AddEditFragment::class.java)
+            //startActivity(intentToMovie)
         }
 
     }
