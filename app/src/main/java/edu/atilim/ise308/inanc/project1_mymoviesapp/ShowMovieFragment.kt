@@ -12,6 +12,7 @@ class ShowMovieFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.show_movie_fragment,container,false)
+
         val tvName = view.findViewById<TextView>(R.id.textView_name)
         val tvActor = view.findViewById<TextView>(R.id.textView_actor)
         val tvDescription = view.findViewById<TextView>(R.id.textView_description)
