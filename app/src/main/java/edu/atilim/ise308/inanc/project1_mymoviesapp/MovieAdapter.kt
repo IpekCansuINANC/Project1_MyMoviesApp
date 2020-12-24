@@ -26,7 +26,6 @@ class MovieAdapter(private val mainActivity: MainActivity, private val movieList
 
         override fun onClick(view: View) {
             //mainActivity.showNote(adapterPosition)
-
         }
 
     }

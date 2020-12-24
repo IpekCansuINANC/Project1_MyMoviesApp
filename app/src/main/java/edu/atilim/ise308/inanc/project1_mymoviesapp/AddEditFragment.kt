@@ -14,7 +14,7 @@ class AddEditFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.add_edit_fragment, container, false)
 
-        /*val editName = view.findViewById<EditText>(R.id.editText_Name)
+        val editName = view.findViewById<EditText>(R.id.editText_Name)
         val editDescription= view.findViewById<EditText>(R.id.editText_Description)
         val editActor = view.findViewById<CheckBox>(R.id.editText_Actor)
         val editView = view.findViewById<CheckBox>(R.id.editText_View)
@@ -22,7 +22,7 @@ class AddEditFragment : Fragment() {
         val cbWatched = view.findViewById<CheckBox>(R.id.checkBox_isWatched)
         val buttonDone = view.findViewById<Button>(R.id.btn_done)
 
-        buttonDone.setOnClickListener{
+       /* buttonDone.setOnClickListener{
 
             val newMovie = MovieModel()
             newMovie.movieName = editName.text.toString()

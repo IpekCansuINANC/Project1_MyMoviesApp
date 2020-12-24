@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
             //FAB BUTONUNA TIKLADIĞINDA ADD EDİT FRAGMENT LAYOUT AÇILACAK
             val newMovie = AddEditFragment()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container,AddEditFragment())
-            fragmentTransaction.show()
+            fragmentTransaction.replace(R.id.mainLayout,AddEditFragment())
+            fragmentTransaction.commit()
 
             //val intentToMovie = Intent(this,AddEditFragment::class.java)
             //startActivity(intentToMovie)
@@ -47,4 +47,5 @@ class MainActivity : AppCompatActivity() {
 
     private fun FragmentTransaction.show() {
     TODO("Not yet implemented")
+}
 }
