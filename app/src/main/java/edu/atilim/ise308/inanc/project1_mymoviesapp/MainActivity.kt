@@ -1,11 +1,8 @@
 package edu.atilim.ise308.inanc.project1_mymoviesapp
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -27,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             val newMovie = AddEditFragment()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_container,AddEditFragment())
-            fragmentTransaction.commit()
+            fragmentTransaction.show()
 
             //val intentToMovie = Intent(this,AddEditFragment::class.java)
             //startActivity(intentToMovie)
@@ -47,4 +44,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    private fun FragmentTransaction.show() {
+    TODO("Not yet implemented")
 }
