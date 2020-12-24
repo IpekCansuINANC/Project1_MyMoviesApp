@@ -1,6 +1,7 @@
 package edu.atilim.ise308.inanc.project1_mymoviesapp
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-class MovieAdapter(private val mainActivity: MainActivity, private val movieList: List<MovieModel>): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
+class MovieAdapter(var movieList: List<MovieModel>): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
     inner class MovieViewHolder(movieItemView: View) : RecyclerView.ViewHolder(movieItemView), View.OnClickListener {
 
@@ -36,10 +37,8 @@ class MovieAdapter(private val mainActivity: MainActivity, private val movieList
     }
 
     override fun getItemCount(): Int {
-        if (movieList != null) {
-            return movieList.size
-        }
-        return -1
+        Log.e("TAG", "${movieList.size}")
+        return movieList.size
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
@@ -49,10 +48,10 @@ class MovieAdapter(private val mainActivity: MainActivity, private val movieList
         holder.description.text = movie.movieDescription
         holder.movieView.text = movie.movieView.toString() // tekrar bak
 
-        when {
+        /*when {
             movie.isWatched -> holder.isWatched.text = mainActivity.resources.getString(R.string.isWatched_text)
 
-        }
+        }*/
     }
 
 }
