@@ -16,30 +16,35 @@ class ShowMovieFragment : Fragment() {
         val tvName = view.findViewById<TextView>(R.id.textView_name)
         val tvActor = view.findViewById<TextView>(R.id.textView_actor)
         val tvDescription = view.findViewById<TextView>(R.id.textView_description)
-        //val tvView = view.findViewById<TextView>(R.id.textView_view)
+        val tvView = view.findViewById<TextView>(R.id.textView_view)
         val tvIsWatched = view.findViewById<TextView>(R.id.textView_isWatched)
 
         tvName.text = arguments!!.getString("movieName")
         tvActor.text = arguments!!.getString("movieActor")
         tvDescription.text = arguments!!.getString("movieDescription")
-        //tvView.text = arguments!!.getString("movieView")
-        if(!arguments!!.getBoolean("isWathed")) tvIsWatched.visibility = View.GONE
+        tvView.text = arguments!!.getString("movieView")
+        if(!arguments!!.getBoolean("isWatched")) tvIsWatched.visibility = View.GONE
 
         return view
     }
 
+    //Provides a method for creating new instances of the fragment, a factory method.
     companion object{
-        fun newInstance(movieModel: MovieModel ) : ShowMovieFragment {    //purpose of the function: create a new fragment
+        fun newInstance(movieModel: MovieModel ) : ShowMovieFragment {//purpose of the function: create a new fragment
             val fragment = ShowMovieFragment()
             val bundle = Bundle(1)
             bundle.putString("movieName", movieModel.movieName)
             bundle.putString("movieActor", movieModel.movieActor)
             bundle.putString("movieDescription", movieModel.movieDescription)
-            //bundle.putInt("movieView",movieModel.movieView) // ??
+            bundle.putInt("movieView",Integer.parseInt(movieModel.movieView.toString()))// ??
             bundle.putBoolean("isWatched", movieModel.isWatched)
             fragment.arguments = bundle
             return fragment
         }
+    }
+
+    fun sendMovieSelected(movieSelected: MovieModel){
+
     }
 
 

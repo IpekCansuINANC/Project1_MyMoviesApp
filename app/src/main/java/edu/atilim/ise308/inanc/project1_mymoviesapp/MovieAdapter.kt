@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-class MovieAdapter(var movieList: List<MovieModel>): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
+class MovieAdapter(private val mainActivity: MainActivity ,var movieList: List<MovieModel>): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
     inner class MovieViewHolder(movieItemView: View) : RecyclerView.ViewHolder(movieItemView), View.OnClickListener {
 
@@ -20,13 +21,16 @@ class MovieAdapter(var movieList: List<MovieModel>): RecyclerView.Adapter<MovieA
         internal var movieView = movieItemView.findViewById<TextView>(R.id.movie_view)
         internal var isWatched = movieItemView.findViewById<TextView>(R.id.cb_isWatched)
 
+
         init {
             movieItemView.isClickable = true
             movieItemView.setOnClickListener(this)
         }
 
         override fun onClick(view: View) {
-            //mainActivity.showNote(adapterPosition)
+            mainActivity.showMovie(adapterPosition)
+            Toast.makeText(mainActivity, "${adapterPosition}", Toast.LENGTH_SHORT).show()
+
         }
 
     }
@@ -47,11 +51,10 @@ class MovieAdapter(var movieList: List<MovieModel>): RecyclerView.Adapter<MovieA
         holder.actor.text = movie.movieActor
         holder.description.text = movie.movieDescription
         holder.movieView.text = movie.movieView.toString() // tekrar bak
-
-        /*when {
+        when {
             movie.isWatched -> holder.isWatched.text = mainActivity.resources.getString(R.string.isWatched_text)
 
-        }*/
+        }
     }
 
 }

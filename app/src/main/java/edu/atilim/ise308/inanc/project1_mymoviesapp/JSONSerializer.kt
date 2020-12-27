@@ -55,5 +55,4 @@ class JSONSerializer(private val filename: String, private val context: Context)
         }
         return movieList
     }
-
 }

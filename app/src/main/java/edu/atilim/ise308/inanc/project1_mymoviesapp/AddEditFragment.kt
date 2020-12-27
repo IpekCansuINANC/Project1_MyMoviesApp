@@ -17,8 +17,8 @@ class AddEditFragment : Fragment() {
 
         val editName = view.findViewById<EditText>(R.id.editText_Name)
         val editDescription= view.findViewById<EditText>(R.id.editText_Description)
-        /*val editActor = view.findViewById<CheckBox>(R.id.checkBox_isWatched)
-        val editView = view.findViewById<CheckBox>(R.id.editText_View)*/
+        val editActor = view.findViewById<EditText>(R.id.editText_Actor)
+        val editView = view.findViewById<EditText>(R.id.editText_View)
         
         val cbWatched = view.findViewById<CheckBox>(R.id.checkBox_isWatched)
         val buttonDone = view.findViewById<Button>(R.id.btn_done)
@@ -28,8 +28,8 @@ class AddEditFragment : Fragment() {
             val newMovie = MovieModel()
             newMovie.movieName = editName.text.toString()
             newMovie.movieDescription = editDescription.text.toString()
-            //newMovie.movieActor = editActor.text.toString()
-            //newMovie.movieView = editView.text.toString()
+            newMovie.movieActor = editActor.text.toString()
+            newMovie.movieView = Integer.parseInt(editView.text.toString())
             newMovie.isWatched = cbWatched.isChecked
             val callingActivity = activity as MainActivity
             callingActivity.createNewMovie(newMovie)
