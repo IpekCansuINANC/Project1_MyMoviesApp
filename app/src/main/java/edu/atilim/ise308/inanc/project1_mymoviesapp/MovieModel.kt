@@ -10,10 +10,10 @@ private val JSON_MOVIE_VIEW = "movie_view"
 private val JSON_IS_WATCHED ="isWatched"
 
 class MovieModel {
-    var movieName: String? = null
-    var movieDescription : String? = null
-    var movieActor: String? =null
-    var movieView: Int? = null
+    var movieName: String? = ""
+    var movieDescription : String? = ""
+    var movieActor: String? =""
+    var movieView: Int? = 0
     var isWatched: Boolean = false
 
     @Throws(JSONException::class)

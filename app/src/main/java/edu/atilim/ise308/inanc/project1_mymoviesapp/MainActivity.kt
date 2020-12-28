@@ -1,27 +1,29 @@
 package edu.atilim.ise308.inanc.project1_mymoviesapp
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
-    private var movieList = ArrayList<MovieModel>()  //mutableListOf()
-    private var jsonSerializer: JSONSerializer? = null
-    private var recyclerAdapter: MovieAdapter? = null
+    companion object {
+        val movieList = mutableListOf<MovieModel>()
+        var currentPosition = -1
+    }
 
+    private var jsonSerializer: JSONSerializer? = null
+    private var recyclerAdapter = MovieAdapter(emptyList()) {
+        currentPosition = it
+        showMovie(it)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,55 +33,31 @@ class MainActivity : AppCompatActivity() {
         fabNewMovie.setOnClickListener {
             //FAB BUTONUNA TIKLADIĞINDA ADD EDİT FRAGMENT LAYOUT AÇILACAK
             findViewById<LinearLayout>(R.id.fragmentContainer).visibility = View.VISIBLE
-            val newMovie = AddEditFragment()
+            findViewById<RecyclerView>(R.id.recyclerView).visibility = View.GONE
+            currentPosition = -1
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragmentContainer, AddEditFragment())
             fragmentTransaction.commit()
-            //val intentToMovie = Intent(this,AddEditFragment::class.java)
-            //startActivity(intentToMovie)
         }
-        jsonSerializer = JSONSerializer("MyMovies",applicationContext)
-        try {
-            movieList = jsonSerializer!!.load()
-        }catch (e: Exception){
-            movieList = ArrayList()
-            Log.e("Error loading data..","",e)
-        }
-
-        recyclerAdapter = MovieAdapter(this,movieList)
-        findViewById<RecyclerView>(R.id.recyclerView).apply {
-            adapter = recyclerAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-        }
-
     }
 
     fun createNewMovie(movie: MovieModel) {
-        movieList.add(movie)
-        Toast.makeText(this, "${movieList.size}", Toast.LENGTH_SHORT).show()
-        recyclerAdapter!!.movieList = movieList
-        recyclerAdapter!!.notifyDataSetChanged()
+        if (currentPosition != -1) {
+            movieList.removeAt(currentPosition)
+            movieList.add(currentPosition, movie)
+        } else {
+            movieList.add(movie)
+        }
+        recyclerAdapter.notifyDataSetChanged()
     }
 
-    //TODO show movie halledilecekkk!
     fun showMovie(movieToShow: Int)  // main activity show the data
     {
-        val fragment = ShowMovieFragment()
-        movieList?.get(movieToShow)?.let{ShowMovieFragment().arguments}
-
-    }
-    private fun saveMovies()
-    {
-        try {
-            jsonSerializer!!.save(this.movieList)
-        }catch (e:Exception){
-            Log.e("Error saving data","",e)
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        saveMovies()
+        findViewById<LinearLayout>(R.id.fragmentContainer).visibility = View.VISIBLE
+        findViewById<RecyclerView>(R.id.recyclerView).visibility = View.GONE
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, ShowMovieFragment())
+        fragmentTransaction.commit()
     }
 
     private fun FragmentTransaction.show() {
@@ -88,7 +66,40 @@ class MainActivity : AppCompatActivity() {
 
     fun hideFragment() {
         findViewById<LinearLayout>(R.id.fragmentContainer).visibility = View.GONE
+        findViewById<RecyclerView>(R.id.recyclerView).visibility = View.VISIBLE
+        recyclerAdapter.notifyDataSetChanged()
     }
 
+    override fun onBackPressed() {
+        if (findViewById<LinearLayout>(R.id.fragmentContainer).visibility == View.VISIBLE) {
+            findViewById<LinearLayout>(R.id.fragmentContainer).visibility = View.GONE
+            findViewById<RecyclerView>(R.id.recyclerView).visibility = View.VISIBLE
+        } else {
+            super.onBackPressed()
+        }
+    }
 
+    fun editWithPosition(currentPosition: Int) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, AddEditFragment())
+        fragmentTransaction.commit()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        JSONSerializer("backup.txt", this).save(movieList)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val data = JSONSerializer("backup.txt", this).load()
+        movieList.addAll(data)
+        Log.e("tag","${movieList.size}")
+        findViewById<RecyclerView>(R.id.recyclerView).apply {
+            adapter = recyclerAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+        }
+        recyclerAdapter.movieList = movieList
+        recyclerAdapter.notifyDataSetChanged()
+    }
 }

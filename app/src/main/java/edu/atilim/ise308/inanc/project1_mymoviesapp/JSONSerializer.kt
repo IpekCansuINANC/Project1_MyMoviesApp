@@ -51,8 +51,9 @@ class JSONSerializer(private val filename: String, private val context: Context)
             // we will ignore this one, since it happens
             //when we start fresh. You could a log statement here.
         }finally {
-            reader!!.close()
+            reader?.close()
         }
         return movieList
     }
+
 }

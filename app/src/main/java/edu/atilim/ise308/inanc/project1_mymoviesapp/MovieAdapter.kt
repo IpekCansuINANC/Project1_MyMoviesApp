@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-class MovieAdapter(private val mainActivity: MainActivity ,var movieList: List<MovieModel>): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
+class MovieAdapter(var movieList: List<MovieModel>, val onClickHandler: (Int) -> Unit): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
     inner class MovieViewHolder(movieItemView: View) : RecyclerView.ViewHolder(movieItemView), View.OnClickListener {
 
@@ -21,18 +20,14 @@ class MovieAdapter(private val mainActivity: MainActivity ,var movieList: List<M
         internal var movieView = movieItemView.findViewById<TextView>(R.id.movie_view)
         internal var isWatched = movieItemView.findViewById<TextView>(R.id.cb_isWatched)
 
-
         init {
             movieItemView.isClickable = true
             movieItemView.setOnClickListener(this)
         }
 
         override fun onClick(view: View) {
-            mainActivity.showMovie(adapterPosition)
-            Toast.makeText(mainActivity, "${adapterPosition}", Toast.LENGTH_SHORT).show()
-
+            onClickHandler(adapterPosition)
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -41,7 +36,6 @@ class MovieAdapter(private val mainActivity: MainActivity ,var movieList: List<M
     }
 
     override fun getItemCount(): Int {
-        Log.e("TAG", "${movieList.size}")
         return movieList.size
     }
 
@@ -51,10 +45,11 @@ class MovieAdapter(private val mainActivity: MainActivity ,var movieList: List<M
         holder.actor.text = movie.movieActor
         holder.description.text = movie.movieDescription
         holder.movieView.text = movie.movieView.toString() // tekrar bak
-        when {
+
+        /*when {
             movie.isWatched -> holder.isWatched.text = mainActivity.resources.getString(R.string.isWatched_text)
 
-        }
+        }*/
     }
 
 }
