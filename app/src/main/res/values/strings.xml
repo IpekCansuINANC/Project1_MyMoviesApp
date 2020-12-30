@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Project1_MyMoviesApp</string>
+    <string name="movie_des_label">MOVIE DESCRIPTION</string>
     <string name="isWatched_text">Watched</string>
+    <string name="notWatched_text">Not Watched</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

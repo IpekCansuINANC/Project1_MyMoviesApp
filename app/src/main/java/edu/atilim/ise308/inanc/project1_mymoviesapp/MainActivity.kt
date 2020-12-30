@@ -11,11 +11,13 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        val movieList = mutableListOf<MovieModel>()
+        //val movieList = mutableListOf<MovieModel>()
+        val movieList = ArrayList<MovieModel>()
         var currentPosition = -1
     }
 
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.replace(R.id.fragmentContainer, AddEditFragment())
             fragmentTransaction.commit()
         }
+
     }
 
     fun createNewMovie(movie: MovieModel) {
@@ -85,16 +88,18 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
+
     override fun onPause() {
         super.onPause()
-        JSONSerializer("backup.txt", this).save(movieList)
+        JSONSerializer("MyMovies", this).save(movieList) //backup.txt
     }
 
     override fun onStart() {
         super.onStart()
-        val data = JSONSerializer("backup.txt", this).load()
+        //val data = JSONSerializer("backup.txt", this).load()
+        val data = JSONSerializer("MyMovies", this).load()
         movieList.addAll(data)
-        Log.e("tag","${movieList.size}")
+        Log.e("tag","${movieList.size}") //deneme
         findViewById<RecyclerView>(R.id.recyclerView).apply {
             adapter = recyclerAdapter
             layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)

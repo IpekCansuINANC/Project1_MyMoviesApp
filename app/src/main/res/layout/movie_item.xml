@@ -2,21 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:background="#C89999"
+    android:orientation="vertical"
+    android:padding="@dimen/card_padding">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/movie_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="8dp"
-        android:layout_margin="8dp">
+        android:layout_margin="@dimen/card_margin"
+        app:cardBackgroundColor="#EAE3E3"
+        app:cardCornerRadius="@dimen/card_corner_radius">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="400dp"
+            android:foregroundTint="#8E5F5F"
             android:padding="16dp">
 
             <TextView
@@ -25,46 +28,124 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:layout_marginEnd="60dp"
+                android:text="name"
+                android:textColor="#0C0C0C"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/movie_actor"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.25" />
 
             <TextView
                 android:id="@+id/movie_actor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:layout_marginEnd="68dp"
+                android:layout_marginBottom="28dp"
                 android:layout_toRightOf="@+id/movie_name"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_name" />
+                android:text="actor"
+                android:textColor="#0C0C0C"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/movie_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/txt_actor" />
 
             <TextView
                 android:id="@+id/movie_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/movie_actor"
-                android:layout_marginTop="4dp"
+                android:layout_marginEnd="76dp"
+                android:layout_marginBottom="88dp"
                 android:layout_toRightOf="@+id/movie_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_actor" />
+                android:text="desc"
+                android:textColor="#0C0C0C"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/cb_isWatched"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/movie_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/movie_description"
+                android:layout_marginEnd="80dp"
                 android:layout_toRightOf="@+id/movie_name"
+                android:text="view"
+                android:textColor="#0C0C0C"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_name" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/txt_view"
+                app:layout_constraintTop_toBottomOf="@+id/movie_description"
+                app:layout_constraintVertical_bias="0.062" />
 
             <CheckBox
                 android:id="@+id/cb_isWatched"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/movie_view"
+                android:layout_marginBottom="24dp"
+                android:text="@string/isWatched_text"
+                android:textColor="#0C0C0C"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.081"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_description" />
+                app:layout_constraintTop_toBottomOf="@+id/txt_view"
+                app:layout_constraintVertical_bias="0.491" />
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Name:"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/txt_actor"
+                app:layout_constraintEnd_toStartOf="@+id/movie_name"
+                app:layout_constraintHorizontal_bias="0.074"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/txt_actor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="20dp"
+                android:text="Actor:"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/txt_desc"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="20dp"
+                android:text="Description:"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/txt_view"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="180dp"
+                android:text="View: "
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

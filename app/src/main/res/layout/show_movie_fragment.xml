@@ -1,56 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="@color/white"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:background="#C89999"
+    android:gravity="center|left"
+    android:orientation="vertical"
+    android:padding="25dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="3dp"
+        android:text="@string/movie_des_label"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/textView_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:padding="3dp"
         android:text="TextView"
+        android:textColor="@color/black"
         android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textView_actor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:padding="3dp"
         android:text="TextView"
+        android:textColor="@color/black"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:padding="3dp"
         android:text="TextView"
+        android:textColor="@color/black"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/textView_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:padding="3dp"
         android:text="TextView"
+        android:textColor="@color/black"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/textView_isWatched"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_margin="3dp"
+        android:padding="3dp"
+        android:text="@string/isWatched_text"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/textView_notWatched"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:text="@string/notWatched_text" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#090809"
+            android:gravity="center"
             android:text="Edit" />
 
         <Button
@@ -58,6 +94,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
+            android:backgroundTint="#0C0B0C"
             android:text="Delete" />
+
     </LinearLayout>
+
 </LinearLayout>

@@ -20,23 +20,39 @@ class ShowMovieFragment : Fragment() {
         val tvName = view.findViewById<TextView>(R.id.textView_name)
         val tvActor = view.findViewById<TextView>(R.id.textView_actor)
         val tvDescription = view.findViewById<TextView>(R.id.textView_description)
-        //val tvView = view.findViewById<TextView>(R.id.textView_view)
+        val tvView = view.findViewById<TextView>(R.id.textView_view)
         val tvIsWatched = view.findViewById<TextView>(R.id.textView_isWatched)
+        val tvNotWatched = view.findViewById<TextView>(R.id.textView_notWatched)
+        val btnDelete = view.findViewById<Button>(R.id.btn_delete)
+        val btnEdit = view.findViewById<Button>(R.id.btn_edit)
+
         tvName.text = currentMovie.movieName
         tvActor.text = currentMovie.movieActor
         tvDescription.text = currentMovie.movieDescription
+        tvView.text = currentMovie.movieView.toString()
+
+
+        if(currentMovie.isWatched == true){
+            tvNotWatched.visibility = View.GONE
+        }
+        if(currentMovie.isWatched == false){
+            tvIsWatched.visibility = View.GONE
+        }
+
         /*tvName.text = arguments!!.getString("movieName")
         tvActor.text = arguments!!.getString("movieActor")
         tvDescription.text = arguments!!.getString("movieDescription")
         //tvView.text = arguments!!.getString("movieView")*/
-        //if(!arguments!!.getBoolean("isWathed")) tvIsWatched.visibility = View.GONE
-        view.findViewById<Button>(R.id.btn_delete).setOnClickListener {
+        //if(!arguments!!.getBoolean("isWatched")) tvIsWatched.visibility = View.GONE
+
+
+        btnDelete.setOnClickListener {
             movieList.removeAt(currentPosition)
             val callingActivity = activity as MainActivity
             callingActivity.hideFragment()
         }
 
-        view.findViewById<Button>(R.id.btn_edit).setOnClickListener {
+        btnEdit.setOnClickListener {
             val callingActivity = activity as MainActivity
             callingActivity.editWithPosition(currentPosition)
         }
@@ -50,6 +66,7 @@ class ShowMovieFragment : Fragment() {
             bundle.putString("movieName", movieModel.movieName)
             bundle.putString("movieActor", movieModel.movieActor)
             bundle.putString("movieDescription", movieModel.movieDescription)
+            bundle.putInt("movieView",Integer.parseInt(movieModel.movieView.toString()))
             //bundle.putInt("movieView",movieModel.movieView) // ??
             bundle.putBoolean("isWatched", movieModel.isWatched)
             fragment.arguments = bundle
