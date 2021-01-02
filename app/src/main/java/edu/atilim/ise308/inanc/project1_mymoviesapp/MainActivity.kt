@@ -15,6 +15,8 @@ import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
+    //GROUP-15 MYMOVIEAPP
+
     companion object {
         //val movieList = mutableListOf<MovieModel>()
         val movieList = ArrayList<MovieModel>()
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             findViewById<RecyclerView>(R.id.recyclerView).visibility = View.GONE
             currentPosition = -1
             val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
             fragmentTransaction.replace(R.id.fragmentContainer, AddEditFragment())
             fragmentTransaction.commit()
         }
@@ -58,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<LinearLayout>(R.id.fragmentContainer).visibility = View.VISIBLE
         findViewById<RecyclerView>(R.id.recyclerView).visibility = View.GONE
         val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
         fragmentTransaction.replace(R.id.fragmentContainer, ShowMovieFragment())
         fragmentTransaction.commit()
     }
@@ -69,7 +73,15 @@ class MainActivity : AppCompatActivity() {
     fun hideFragment() {
         findViewById<LinearLayout>(R.id.fragmentContainer).visibility = View.GONE
         findViewById<RecyclerView>(R.id.recyclerView).visibility = View.VISIBLE
+        clearFragment()
         recyclerAdapter.notifyDataSetChanged()
+    }
+
+    private fun clearFragment() {
+        val fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
+        fragment?.let {
+            supportFragmentManager.beginTransaction().remove(fragment).commit()
+        }
     }
 
     override fun onBackPressed() {
@@ -84,6 +96,7 @@ class MainActivity : AppCompatActivity() {
     fun editWithPosition(currentPosition: Int) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, AddEditFragment())
+        fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
         fragmentTransaction.commit()
     }
 

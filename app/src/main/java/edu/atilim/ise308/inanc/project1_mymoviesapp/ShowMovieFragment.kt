@@ -49,7 +49,7 @@ class ShowMovieFragment : Fragment() {
         btnDelete.setOnClickListener {
             movieList.removeAt(currentPosition)
             val callingActivity = activity as MainActivity
-            callingActivity.hideFragment()
+            //callingActivity.hideFragment()
         }
 
         btnEdit.setOnClickListener {
