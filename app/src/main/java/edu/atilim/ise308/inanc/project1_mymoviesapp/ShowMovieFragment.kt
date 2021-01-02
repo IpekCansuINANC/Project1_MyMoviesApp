@@ -49,7 +49,7 @@ class ShowMovieFragment : Fragment() {
         btnDelete.setOnClickListener {
             movieList.removeAt(currentPosition)
             val callingActivity = activity as MainActivity
-            //callingActivity.hideFragment()
+            callingActivity.hideFragment()
         }
 
         btnEdit.setOnClickListener {
@@ -60,7 +60,7 @@ class ShowMovieFragment : Fragment() {
     }
 
     companion object{
-        fun newInstance(movieModel: MovieModel ) : ShowMovieFragment {    //purpose of the function: create a new fragment
+        fun newInstance(movieModel: MovieModel ) : ShowMovieFragment {//purpose of the function: create a new fragment
             val fragment = ShowMovieFragment()
             val bundle = Bundle(1)
             bundle.putString("movieName", movieModel.movieName)

@@ -33,20 +33,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //FloatingActionButton -> opens a add_edit_fragment
         val fabNewMovie = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         fabNewMovie.setOnClickListener {
-            //FAB BUTONUNA TIKLADIĞINDA ADD EDİT FRAGMENT LAYOUT AÇILACAK
             findViewById<LinearLayout>(R.id.fragmentContainer).visibility = View.VISIBLE
             findViewById<RecyclerView>(R.id.recyclerView).visibility = View.GONE
             currentPosition = -1
             val fragmentTransaction = supportFragmentManager.beginTransaction()
+            //Animation
             fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
             fragmentTransaction.replace(R.id.fragmentContainer, AddEditFragment())
             fragmentTransaction.commit()
         }
     }
 
-    fun createNewMovie(movie: MovieModel) {
+
+    fun createNewMovie(movie: MovieModel) { //Creating new Movie
         if (currentPosition != -1) {
             movieList.removeAt(currentPosition)
             movieList.add(currentPosition, movie)
@@ -56,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         recyclerAdapter.notifyDataSetChanged()
     }
 
-    fun showMovie(movieToShow: Int)  // main activity show the data
+    fun showMovie(movieToShow: Int)  //Main activity show the data
     {
         findViewById<LinearLayout>(R.id.fragmentContainer).visibility = View.VISIBLE
         findViewById<RecyclerView>(R.id.recyclerView).visibility = View.GONE
@@ -84,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //Back Pressed -> when click back button, bring the old fragment page
     override fun onBackPressed() {
         if (findViewById<LinearLayout>(R.id.fragmentContainer).visibility == View.VISIBLE) {
             findViewById<LinearLayout>(R.id.fragmentContainer).visibility = View.GONE
@@ -94,12 +97,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun editWithPosition(currentPosition: Int) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val fragmentTransaction = supportFragmentManager.beginTransaction() //Brings the fragment which belongs to current item for editing
         fragmentTransaction.replace(R.id.fragmentContainer, AddEditFragment())
         fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
         fragmentTransaction.commit()
     }
-
 
     override fun onPause() {
         super.onPause()

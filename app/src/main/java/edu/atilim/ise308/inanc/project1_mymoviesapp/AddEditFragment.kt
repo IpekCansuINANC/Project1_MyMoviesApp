@@ -23,7 +23,6 @@ class AddEditFragment : Fragment() {
         val buttonDone = view.findViewById<Button>(R.id.btn_done)
 
         //Seçilen verinin bilgilerinin ekrana yazılı gelmesi kısmı
-
         if (MainActivity.currentPosition != -1) {
             val currentMovie = MainActivity.movieList[MainActivity.currentPosition]
             editName.setText(currentMovie.movieName)
