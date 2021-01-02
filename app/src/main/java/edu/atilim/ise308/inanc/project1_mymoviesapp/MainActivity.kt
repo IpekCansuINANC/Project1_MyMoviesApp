@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.replace(R.id.fragmentContainer, AddEditFragment())
             fragmentTransaction.commit()
         }
-
     }
 
     fun createNewMovie(movie: MovieModel) {
@@ -96,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        //val data = JSONSerializer("backup.txt", this).load()
+        //val data = JSONSerializer("backup.txt", this).load() //changesss
         val data = JSONSerializer("MyMovies", this).load()
         movieList.addAll(data)
         Log.e("tag","${movieList.size}") //deneme
