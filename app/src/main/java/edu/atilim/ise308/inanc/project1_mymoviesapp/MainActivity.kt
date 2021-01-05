@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var jsonSerializer: JSONSerializer? = null
-    private var recyclerAdapter = MovieAdapter(emptyList()) {
+    private var recyclerAdapter = MovieAdapter(emptyList()) { //
         currentPosition = it
         showMovie(it)
     }
@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.commit()
         }
     }
-
 
     fun createNewMovie(movie: MovieModel) { //Creating new Movie
         if (currentPosition != -1) {

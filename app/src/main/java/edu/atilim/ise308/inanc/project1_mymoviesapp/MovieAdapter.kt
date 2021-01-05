@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 class MovieAdapter(var movieList: List<MovieModel>, val onClickHandler: (Int) -> Unit): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
     inner class MovieViewHolder(movieItemView: View) : RecyclerView.ViewHolder(movieItemView), View.OnClickListener {
-
         internal var card_view = movieItemView.findViewById<CardView>(R.id.movie_cardView)
         internal var name = movieItemView.findViewById<TextView>(R.id.movie_name)
         internal var description = movieItemView.findViewById<TextView>(R.id.movie_description)
@@ -26,7 +25,7 @@ class MovieAdapter(var movieList: List<MovieModel>, val onClickHandler: (Int) ->
         }
 
         override fun onClick(view: View) {
-            onClickHandler(adapterPosition)
+            onClickHandler(adapterPosition)  //tıklanıldığı itemin positionu tutuyor tutulan değeri döndürüyor.
         }
     }
 
